@@ -39,6 +39,7 @@ func RecordTLSConfig(root tls.Certificate, w *WritableArchive) (*tls.Config, err
 	tp := &tlsProxy{&root, root_cert, nil, w, sync.Mutex{}, nil}
 	return &tls.Config{
 		GetConfigForClient: tp.getRecordConfigForClient,
+		InsecureSkipVerify: true,
 	}, nil
 }
 
