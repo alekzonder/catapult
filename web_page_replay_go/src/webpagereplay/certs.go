@@ -83,6 +83,7 @@ func MintServerCert(serverName string, rootCert *x509.Certificate, rootKey crypt
 	}
 	conn, err := tls.DialWithDialer(dialer, "tcp", fmt.Sprintf("%s:443", serverName), &tls.Config{
 		NextProtos: []string{"h2", "http/1.1"},
+		InsecureSkipVerify: true,
 	})
 	if err != nil {
 		return nil, "", fmt.Errorf("Couldn't reach host %s: %v", serverName, err)
