@@ -160,7 +160,9 @@ func (proxy *replayingProxy) ServeHTTP(w http.ResponseWriter, req *http.Request)
 // NewRecordingProxy constructs an HTTP proxy that records responses into an archive.
 // The proxy is listening for requests on a port that uses the given scheme (e.g., http, https).
 func NewRecordingProxy(a *WritableArchive, scheme string, transformers []ResponseTransformer) http.Handler {
-	return &recordingProxy{http.DefaultTransport.(*http.Transport), a, scheme, transformers}
+	transport := http.DefaultTransport.(*http.Transport)
+	transport.TLSClientConfig.InsecureSkipVerify = true
+	return &recordingProxy{transport, a, scheme, transformers}
 }
 
 type recordingProxy struct {
