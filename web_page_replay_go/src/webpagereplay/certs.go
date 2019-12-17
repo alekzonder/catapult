@@ -180,6 +180,7 @@ func (tp *tlsProxy) getRecordConfigForClient(clientHello *tls.ClientHelloInfo) (
 					PrivateKey:  tp.root.PrivateKey,
 				}},
 			NextProtos: buildNextProtos(negotiatedProtocol),
+			InsecureSkipVerify: true,
 		}, nil
 	}
 
@@ -196,5 +197,6 @@ func (tp *tlsProxy) getRecordConfigForClient(clientHello *tls.ClientHelloInfo) (
 				Certificate: [][]byte{derBytes},
 				PrivateKey:  tp.root.PrivateKey}},
 		NextProtos: buildNextProtos(negotiatedProtocol),
+		InsecureSkipVerify: true,
 	}, nil
 }
