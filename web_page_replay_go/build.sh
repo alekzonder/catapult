@@ -3,6 +3,8 @@
 # https://github.com/mitchellh/gox
 gox -osarch="darwin/amd64" -osarch="linux/amd64" ./src
 
+rm wpr-darwin.tgz wpr-linux.tgz
+
 
 # darwin
 rm -rf ./wpr
